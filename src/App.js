@@ -21,13 +21,20 @@ class BooksApp extends React.Component {
     const shelf = event.target.value;
     BooksAPI.update(updatedBook, shelf)
       .then((res)=>{
+        /* Remove the updatedBook from state 
+        * (if it already exists in one of the shelves) */
         this.setState((prevState)=>({
-          books: prevState.books.map((book)=>{
-            if(book.id===updatedBook.id)
-              book.shelf = shelf;
-            return book;
+          books: prevState.books.filter((book)=>{
+              return (book.id!==updatedBook.id)
           })
         }));
+        /* Append the updatedBook on the state */
+        BooksAPI.get(updatedBook.id)
+          .then((res)=>{
+            this.setState((prevState)=>({
+              books: [...prevState.books, res]
+            }));
+          });
       });
   }
 
@@ -36,11 +43,6 @@ class BooksApp extends React.Component {
   )
 
   render() {
-    /* TODO: retirar essa chamada */
-    // BooksAPI.getAll()
-    //   .then(res=>{
-    //     console.log(res);
-    //   });
     return (
       <div className="app">
         <Route path="/search" render={()=>(
