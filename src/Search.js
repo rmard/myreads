@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import Spinner from './Spinner'
+import { DebounceInput } from 'react-debounce-input'
 
 class Search extends React.Component {
   constructor(props){
@@ -56,8 +57,9 @@ class Search extends React.Component {
             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
             you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input 
-              type="text" 
+            <DebounceInput
+              minLength={0}
+              debounceTimeout={500}
               onChange={this.handleChange}
               value={this.state.searchQuery} 
               placeholder="Search by title or author"
