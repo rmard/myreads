@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Route } from 'react-router-dom'
 import Bookshelf from './Bookshelf'
+import BookDetails from './BookDetails'
 import Search from './Search'
 import Spinner from './Spinner'
 
@@ -57,6 +58,7 @@ class BooksApp extends React.Component {
     else
       return (
         <div className="app">
+          <Route path={`/book/:bookId`} component={BookDetails} />
           <Route path="/search" render={()=>(
             <Search 
               updateBook={this.updateBook}
