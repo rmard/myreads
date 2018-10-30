@@ -19,32 +19,35 @@ class BookDetails extends React.Component {
   }	
 	render = () => {
 		const book = this.state.book;
-    if(this.state.loading===true)
+    if(this.state.loading===true) {
       return (
         <Spinner />    
       );
-    else	
-			if(book!==null)
+    }
+    else {	
+			if(book!==null) {
 				return (
 					<div className='book-details'>
-						<a className="book-details-back"
-							href='#'
-							onClick={()=>{window.history.back()}}>Close</a>
+						<button className="book-details-back"
+							onClick={()=>{window.history.back()}}>Close
+            </button>
 	          <h1 className='book-details-title'>{book.title}</h1>
-
 	        	<div className='book-info'>
-						<div 
-	          	className="book-details-cover" 
-	          	style={{ 
-	            	backgroundImage: `url(${book.imageLinks&&book.imageLinks.thumbnail})` 
-	          	}}>
-	        	</div>        	
+  						<div 
+  	          	className="book-details-cover" 
+  	          	style={{ 
+  	            	backgroundImage: `url(${book.imageLinks&&book.imageLinks.thumbnail})` 
+  	          	}}>
+  	        	</div>        	
 	        		{book.description}
 	        	</div>
 					</div>
-				)
-			else
+				);
+			}
+			else {
 				return (<h2>Book not found</h2>);
+			}
+		}
 	}
 }
 

@@ -209,3 +209,8 @@ body, .app {
 .book-details-title {
   border-bottom: 1px solid #dedede;
 }
+
+.book-details-back {
+  border: none;
+  cursor: pointer;
+}

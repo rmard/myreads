@@ -3,12 +3,13 @@ import React from 'react'
 class Book extends React.Component {
   render = () => {
     var book = this.props.book;
+    /* The book is in the shelf passed through props.
+      If the prop doesn't exist, the book is in the shelf of the object's param
+    */
     var shelf = this.props.shelf ? this.props.shelf : book.shelf;
-    if(shelf === undefined)
+    if(shelf === undefined) {
       shelf = 'none';
-    if(!book)
-        return null;
-    else
+    }
     return (
       <div className="book">
         <div className="book-top">

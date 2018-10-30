@@ -51,11 +51,12 @@ class BooksApp extends React.Component {
   )
 
   render() {
-    if(this.state.loading===true)
+    if(this.state.loading===true) {
       return (
         <Spinner />    
       );
-    else
+    }
+    else {
       return (
         <div className="app">
           <Route path={`/book/:bookId`} component={BookDetails} />
@@ -96,6 +97,7 @@ class BooksApp extends React.Component {
           )} />
         </div>
       );
+    }
   }
 }
 
