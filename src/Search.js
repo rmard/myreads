@@ -1,13 +1,15 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
+import Spinner from './Spinner'
 
 class Search extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       searchQuery: "",
-      books: []
+      books: [],
+      loading: false,
     }   
   }
   handleChange = (event) => {
@@ -16,12 +18,19 @@ class Search extends React.Component {
     if(searchQuery==='')
         this.setState({books: []})
     else {
+      this.setState({loading: true});
       BooksAPI.search(searchQuery)
         .then((res)=>{
           if(res.error)
-            this.setState({books: []})
+            this.setState({
+              books: [], 
+              loading: false
+            })
           else
-            this.setState({books: res});
+            this.setState({
+              books: res,
+              loading: false
+            });
         })
     }
   }
@@ -55,21 +64,23 @@ class Search extends React.Component {
             />
           </div>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid">
-            {this.state.books.map((book)=>(
-              <li key={book.id}>
-                <Book 
-                  book={book} 
-                  updateBook={updateBook}
-                  shelf={this.checkShelf(book)}
-                />
-              </li>
-            ))}
-          </ol>
-        </div>
+        {this.state.loading ? <Spinner /> : (
+          <div className="search-books-results">
+            <ol className="books-grid">
+              {this.state.books.map((book)=>(
+                <li key={book.id}>
+                  <Book 
+                    book={book} 
+                    updateBook={updateBook}
+                    shelf={this.checkShelf(book)}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
       </div>        
-    )
+    );
   }
 }
 

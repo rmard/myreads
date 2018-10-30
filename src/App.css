@@ -172,3 +172,14 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+
+/* spinner */
+
+.spinner {
+  left: 50%;
+  top: 50%;
+  margin-left: -32px;
+  margin-top: -32px;
+  position: absolute;
+}
